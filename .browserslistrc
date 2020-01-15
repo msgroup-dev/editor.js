@@ -1,0 +1,10 @@
+Edge >=18,
+Chrome >=65,
+ChromeAndroid >=65,
+Firefox >=55,
+FirefoxAndroid >=55,
+iOS >=9,
+Safari >=10,
+Opera >=36,
+Android >=4,
+Samsung >=8.2

@@ -1,0 +1,47 @@
+{
+  "name": "@dsstudio/editorjs",
+  "version": "0.1",
+  "description": "DS Studio wrapper on EditorJS",
+  "main": "index.js",
+  "author": "n.sobolev",
+  "license": "MIT",
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/msgroup-dev/editorjs.git"
+  },
+  "scripts": {
+    "start": "webpack-dev-server --env.isDevelopment",
+    "build": "webpack"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.8.3",
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/preset-env": "^7.8.3",
+    "autoprefixer": "^9.7.3",
+    "babel-loader": "^8.0.6",
+    "clean-webpack-plugin": "^3.0.0",
+    "css-hot-loader": "^1.4.4",
+    "css-loader": "^3.4.2",
+    "file-loader": "^5.0.2",
+    "html-webpack-plugin": "^3.2.0",
+    "less": "^3.10.3",
+    "less-loader": "^5.0.0",
+    "less-plugin-glob": "^3.0.0",
+    "mini-css-extract-plugin": "^0.9.0",
+    "optimize-css-assets-webpack-plugin": "^5.0.3",
+    "postcss-loader": "^3.0.0",
+    "style-loader": "^1.1.2",
+    "webpack": "^4.41.5",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.10.1"
+  },
+  "dependencies": {
+    "@editorjs/editorjs": "^2.16.1",
+    "@editorjs/embed": "^2.2.1",
+    "@editorjs/header": "^2.3.2",
+    "@editorjs/image": "^2.3.3",
+    "@editorjs/list": "^1.4.0",
+    "@editorjs/marker": "^1.2.2",
+    "core-js": "^3.6.4"
+  }
+}
