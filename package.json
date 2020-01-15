@@ -1,6 +1,6 @@
 {
-  "name": "@dsstudio/editorjs",
-  "version": "0.1",
+  "name": "dsstudio-editorjs",
+  "version": "1.0.0",
   "description": "DS Studio wrapper on EditorJS",
   "main": "index.js",
   "author": "n.sobolev",
