@@ -15,9 +15,10 @@ class CustomMarker {
       active: this.api.styles.inlineToolButtonActive
     };
 
-    this.colors = this.config.colors || [{ backgroundColor: '#f2c94c', color: 'inherit' }, { backgroundColor: '#27ae60', color: 'white'}];
+    this.classNameColors = this.config.colors || ['cdx-marker_view_default', 'cdx-marker_view_danger', 'cdx-marker_view_success'];
     this.colorList = null;
     this.buttonsList = [];
+    this.currentClassColor = '';
 
     this.listColorClasses = {
       list: 'color-list',
@@ -27,8 +28,8 @@ class CustomMarker {
     };
 
     this.onClickButtonColor = ({ target }) => {
-      this.currentMark.style.backgroundColor = target.dataset.backgroundColor;
-      this.currentMark.style.color = target.dataset.color;
+      this.removeCurrentClassColor();
+      this.setCurrentClassColor(target.dataset.className);
     };
   }
 
@@ -49,16 +50,14 @@ class CustomMarker {
     this.colorList = document.createElement('ul');
     this.colorList.classList.add(this.listColorClasses.list, this.listColorClasses.listHidden);
 
-    this.colors.forEach(({ backgroundColor, color }) => {
+    this.classNameColors.forEach((className) => {
       const li = document.createElement('li');
       const button = document.createElement('button');
 
-      button.classList.add(this.listColorClasses.button);
+      button.classList.add(this.listColorClasses.button, className);
       button.type = 'button';
-      button.style.backgroundColor = backgroundColor;
 
-      button.dataset.backgroundColor = backgroundColor;
-      button.dataset.color = color;
+      button.dataset.className = className;
 
       this.buttonsList.push(button);
 
@@ -86,17 +85,15 @@ class CustomMarker {
   }
 
   wrap(range) {
-    let marker = document.createElement(this.tag);
+    this.currentMark = document.createElement(this.tag);
 
-    marker.style.backgroundColor = this.colors[0].backgroundColor;
-    marker.style.color = this.colors[0].color;
+    this.currentMark.classList.add(CustomMarker.CSS);
+    this.setCurrentClassColor(this.classNameColors[0]);
+    this.currentMark.appendChild(range.extractContents());
 
-    marker.classList.add(CustomMarker.CSS);
-    marker.appendChild(range.extractContents());
+    range.insertNode(this.currentMark);
 
-    range.insertNode(marker);
-
-    this.api.selection.expandToTag(marker);
+    this.api.selection.expandToTag(this.currentMark);
   }
 
   unwrap(termWrapper) {
@@ -149,6 +146,15 @@ class CustomMarker {
     } else {
       this.hideActions();
     }
+  }
+
+  setCurrentClassColor(className) {
+    this.currentMark.classList.add(className);
+    this.currentClassColor = className;
+  }
+
+  removeCurrentClassColor() {
+    this.currentMark.classList.remove(this.currentClassColor);
   }
 
   static get sanitize() {

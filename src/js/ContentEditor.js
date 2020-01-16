@@ -34,9 +34,6 @@ class ContentEditor {
         marker: {
           class: CustomMarker,
           shortcut: 'CMD+SHIFT+M',
-          config: {
-            colors: [{ backgroundColor: 'red', color: 'white' }, {backgroundColor: 'grey', color: 'black'}],
-          }
         },
       },
     };
