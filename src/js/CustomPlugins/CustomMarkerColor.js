@@ -1,12 +1,12 @@
-class CustomMarker {
+class CustomMarkerColor {
   static get CSS() {
-    return 'cdx-marker';
+    return 'cdx-color';
   };
 
   constructor({ api, config = {} }) {
     this.api = api;
     this.button = null;
-    this.tag = 'MARK';
+    this.tag = 'SPAN';
     this.currentMark = null;
     this.config = config || {};
 
@@ -15,16 +15,16 @@ class CustomMarker {
       active: this.api.styles.inlineToolButtonActive
     };
 
-    this.classNameColors = this.config.colors || [`${CustomMarker.CSS}_view_default`, `${CustomMarker.CSS}_view_danger`, `${CustomMarker.CSS}_view_success`];
+    this.classNameColors = this.config.colors || [`${CustomMarkerColor.CSS}_view_default`, `${CustomMarkerColor.CSS}_view_danger`, `${CustomMarkerColor.CSS}_view_success`];
     this.colorList = null;
     this.buttonsList = [];
     this.currentClassColor = '';
 
     this.listColorClasses = {
-      list: 'background-color-list',
-      listHidden: 'background-color-list_view_hidden',
-      item: 'background-color-list__item',
-      button: 'background-color-list__button'
+      list: 'color-list',
+      listHidden: 'color-list_view_hidden',
+      item: 'color-list__item',
+      button: 'color-list__button'
     };
 
     this.onClickButtonColor = ({ target }) => {
@@ -56,6 +56,7 @@ class CustomMarker {
 
       button.classList.add(this.listColorClasses.button, className);
       button.type = 'button';
+      button.textContent = 'C';
 
       button.dataset.className = className;
 
@@ -75,7 +76,7 @@ class CustomMarker {
       return;
     }
 
-    let termWrapper = this.api.selection.findParentTag(this.tag, CustomMarker.CSS);
+    let termWrapper = this.api.selection.findParentTag(this.tag, CustomMarkerColor.CSS);
 
     if (termWrapper) {
       this.unwrap(termWrapper);
@@ -87,7 +88,7 @@ class CustomMarker {
   wrap(range) {
     this.currentMark = document.createElement(this.tag);
 
-    this.currentMark.classList.add(CustomMarker.CSS);
+    this.currentMark.classList.add(CustomMarkerColor.CSS);
     this.setCurrentClassColor(this.classNameColors[0]);
     this.currentMark.appendChild(range.extractContents());
 
@@ -112,7 +113,7 @@ class CustomMarker {
   }
 
   checkState() {
-    this.currentMark = this.api.selection.findParentTag(this.tag, CustomMarker.CSS);
+    this.currentMark = this.api.selection.findParentTag(this.tag, CustomMarkerColor.CSS);
     const state = Boolean(this.currentMark);
 
     this.checkActions(state);
@@ -160,10 +161,10 @@ class CustomMarker {
   static get sanitize() {
     return {
       mark: {
-        class: CustomMarker.CSS
+        class: CustomMarkerColor.CSS
       }
     };
   }
 }
 
-export default CustomMarker;
+export default CustomMarkerColor;
