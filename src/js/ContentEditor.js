@@ -3,8 +3,10 @@ import Header from '@editorjs/header';
 import List from '@editorjs/list';
 import Embed from '@editorjs/embed';
 import ImageTool from '@editorjs/image';
-import Marker from './CustomPlugins/CustomMarker';
-import Color from './CustomPlugins/CustomColor';
+import Marker from './CustomPlugins/Marker';
+import Color from './CustomPlugins/Color';
+import Underline from './CustomPlugins/Underline';
+import Delete from './CustomPlugins/Delete';
 
 import '../styles/bootstrap.less';
 
@@ -39,7 +41,9 @@ class ContentEditor {
         color: {
           class: Color,
           shortcut: 'CMD+SHIFT+C',
-        }
+        },
+        underline: Underline,
+        delete: Delete,
       },
     };
 
