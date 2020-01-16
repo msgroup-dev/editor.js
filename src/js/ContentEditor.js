@@ -2,7 +2,7 @@ import EditorJS from '@editorjs/editorjs';
 import Header from '@editorjs/header';
 import List from '@editorjs/list';
 import Embed from '@editorjs/embed';
-import Marker from '@editorjs/marker';
+import CustomMarker from './CustomPlugins/CustomMarker';
 import ImageTool from '@editorjs/image';
 
 import '../styles/bootstrap.less';
@@ -10,7 +10,7 @@ import '../styles/bootstrap.less';
 class ContentEditor {
   constructor(initProps) {
     const defaultProps = {
-      containerEditorName: 'editorjs',
+      holder: 'editorjs',
       tools: {
         header: {
           class: Header,
@@ -32,18 +32,19 @@ class ContentEditor {
           class: ImageTool,
         },
         marker: {
-          class: Marker,
+          class: CustomMarker,
           shortcut: 'CMD+SHIFT+M',
+          config: {
+            colors: [{ backgroundColor: 'red', color: 'white' }, {backgroundColor: 'grey', color: 'black'}],
+          }
         },
       },
-      data: {}
     };
 
     const params = { ...defaultProps, ...initProps };
 
-    if (!params.containerEditorName) throw new Error('Please, set container editorJS.');
+    if (!params.holder) throw new Error('Please, set container editorJS.');
 
-    this.containerEditorName = params.containerEditorName;
     this.editorJS = null;
     this.params = params;
 
@@ -51,11 +52,7 @@ class ContentEditor {
   }
 
   init() {
-    this.editorJS = new EditorJS({
-      holder: this.containerEditorName,
-      tools: this.params.tools,
-      data: this.params.data,
-    });
+    this.editorJS = new EditorJS({ ...this.params });
   }
 }
 
