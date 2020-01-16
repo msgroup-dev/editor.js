@@ -2,9 +2,9 @@ import EditorJS from '@editorjs/editorjs';
 import Header from '@editorjs/header';
 import List from '@editorjs/list';
 import Embed from '@editorjs/embed';
-import CustomMarker from './CustomPlugins/CustomMarker';
-import CustomMarkerColor from './CustomPlugins/CustomMarkerColor';
 import ImageTool from '@editorjs/image';
+import Marker from './CustomPlugins/CustomMarker';
+import Color from './CustomPlugins/CustomColor';
 
 import '../styles/bootstrap.less';
 
@@ -33,11 +33,11 @@ class ContentEditor {
           class: ImageTool,
         },
         marker: {
-          class: CustomMarker,
+          class: Marker,
           shortcut: 'CMD+SHIFT+M',
         },
         color: {
-          class: CustomMarkerColor,
+          class: Color,
           shortcut: 'CMD+SHIFT+C',
         }
       },

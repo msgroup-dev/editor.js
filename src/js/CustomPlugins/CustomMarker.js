@@ -1,4 +1,4 @@
-class CustomMarker {
+class Marker {
   static get CSS() {
     return 'cdx-marker';
   };
@@ -15,7 +15,7 @@ class CustomMarker {
       active: this.api.styles.inlineToolButtonActive
     };
 
-    this.classNameColors = this.config.colors || [`${CustomMarker.CSS}_view_default`, `${CustomMarker.CSS}_view_danger`, `${CustomMarker.CSS}_view_success`];
+    this.classNameColors = this.config.colors || [`${Marker.CSS}_view_default`, `${Marker.CSS}_view_danger`, `${Marker.CSS}_view_success`];
     this.colorList = null;
     this.buttonsList = [];
     this.currentClassColor = '';
@@ -75,7 +75,7 @@ class CustomMarker {
       return;
     }
 
-    let termWrapper = this.api.selection.findParentTag(this.tag, CustomMarker.CSS);
+    let termWrapper = this.api.selection.findParentTag(this.tag, Marker.CSS);
 
     if (termWrapper) {
       this.unwrap(termWrapper);
@@ -87,7 +87,7 @@ class CustomMarker {
   wrap(range) {
     this.currentMark = document.createElement(this.tag);
 
-    this.currentMark.classList.add(CustomMarker.CSS);
+    this.currentMark.classList.add(Marker.CSS);
     this.setCurrentClassColor(this.classNameColors[0]);
     this.currentMark.appendChild(range.extractContents());
 
@@ -112,7 +112,7 @@ class CustomMarker {
   }
 
   checkState() {
-    this.currentMark = this.api.selection.findParentTag(this.tag, CustomMarker.CSS);
+    this.currentMark = this.api.selection.findParentTag(this.tag, Marker.CSS);
     const state = Boolean(this.currentMark);
 
     this.checkActions(state);
@@ -121,7 +121,7 @@ class CustomMarker {
   }
 
   get toolboxIcon() {
-    return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="1 2 13 12" width="13" height="12"><path d="M8.367 9.633L10.7 10.98l-.624 1.135-.787-.025-.78 1.35H6.94l1.193-2.066-.407-.62.642-1.121zm.436-.763l2.899-5.061a1.278 1.278 0 011.746-.472c.617.355.835 1.138.492 1.76l-2.815 5.114-2.322-1.34zM2.62 11.644H5.39a.899.899 0 110 1.798H2.619a.899.899 0 010-1.798z"/></svg>';
+    return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="1 2 13 12" width="14" height="14"><path d="M8.367 9.633L10.7 10.98l-.624 1.135-.787-.025-.78 1.35H6.94l1.193-2.066-.407-.62.642-1.121zm.436-.763l2.899-5.061a1.278 1.278 0 011.746-.472c.617.355.835 1.138.492 1.76l-2.815 5.114-2.322-1.34zM2.62 11.644H5.39a.899.899 0 110 1.798H2.619a.899.899 0 010-1.798z"/></svg>';
   }
 
   showActions() {
@@ -160,10 +160,10 @@ class CustomMarker {
   static get sanitize() {
     return {
       mark: {
-        class: CustomMarker.CSS
+        class: Marker.CSS
       }
     };
   }
 }
 
-export default CustomMarker;
+export default Marker;
