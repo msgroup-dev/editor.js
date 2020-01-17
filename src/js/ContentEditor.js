@@ -7,6 +7,7 @@ import Marker from './CustomPlugins/Marker';
 import Color from './CustomPlugins/Color';
 import Underline from './CustomPlugins/Underline';
 import Delete from './CustomPlugins/Delete';
+import FontSize from './CustomPlugins/FontSize';
 
 import '../styles/bootstrap.less';
 
@@ -44,6 +45,7 @@ class ContentEditor {
         },
         underline: Underline,
         delete: Delete,
+        fontsize: FontSize,
       },
     };
 
