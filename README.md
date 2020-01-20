@@ -30,8 +30,12 @@
 
 Передается массив, например, для плагина **Color** будет:` ['cdx-color_view_defaul', 'cdx-color_view_danger', 'cdx-color_view_success']`. 
 
-Для **Marker** и **Color** - свойство с именем *colors*. 
-Для **FontSize** - свойтсво с имененм *sizes*.
+#### Конфигурация Marker и Colors
+Для *Marker* и *Color* - свойство с именем **colors**. 
+
+
+#### Конфигурация для FontSize
+Для *FontSize* - свойтсво с имененм **sizes**.
 
 **Пример** полного кода:
 ```javascript
@@ -44,7 +48,7 @@ color: {
 }
 ```
 ## Инициализация плагина
-Подключите из папки **dist** файлы **js** и **css**: *editor.js* и *editor.css*
+Подключите из папки dist файлы **js** и **css**: *editor.js* и *editor.css*
 Класс - обертка будет доступна в объекте **window**: *window.editorJS*
 
 Пример инициализации:
@@ -53,3 +57,5 @@ if (window.editorJS !== undefined) {
 	var editor = new window.editorJS();
 }
 ```
+
+
