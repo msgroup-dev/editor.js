@@ -45,11 +45,11 @@ class ContentEditor {
         },
         underline: Underline,
         delete: Delete,
-        fontsize: FontSize,
+        size: FontSize,
       },
     };
 
-    const params = { ...defaultProps, ...initProps };
+    const params = initProps || defaultProps;
 
     if (!params.holder) throw new Error('Please, set container editorJS.');
 

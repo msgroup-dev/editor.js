@@ -7,7 +7,7 @@ class Color {
     this.api = api;
     this.button = null;
     this.tag = 'SPAN';
-    this.currentMark = null;
+    this.currentSpan = null;
     this.config = config || {};
 
     this.iconClasses = {
@@ -18,7 +18,6 @@ class Color {
     this.classNameColors = this.config.colors || [`${Color.CSS}_view_default`, `${Color.CSS}_view_danger`, `${Color.CSS}_view_success`];
     this.colorList = null;
     this.buttonsList = [];
-    this.currentClassColor = '';
 
     this.listColorClasses = {
       list: 'color-list',
@@ -86,15 +85,15 @@ class Color {
   }
 
   wrap(range) {
-    this.currentMark = document.createElement(this.tag);
+    this.currentSpan = document.createElement(this.tag);
 
-    this.currentMark.classList.add(Color.CSS);
+    this.currentSpan.classList.add(Color.CSS);
     this.setCurrentClassColor(this.classNameColors[0]);
-    this.currentMark.appendChild(range.extractContents());
+    this.currentSpan.appendChild(range.extractContents());
 
-    range.insertNode(this.currentMark);
+    range.insertNode(this.currentSpan);
 
-    this.api.selection.expandToTag(this.currentMark);
+    this.api.selection.expandToTag(this.currentSpan);
   }
 
   unwrap(termWrapper) {
@@ -113,8 +112,8 @@ class Color {
   }
 
   checkState() {
-    this.currentMark = this.api.selection.findParentTag(this.tag, Color.CSS);
-    const state = Boolean(this.currentMark);
+    this.currentSpan = this.api.selection.findParentTag(this.tag, Color.CSS);
+    const state = Boolean(this.currentSpan);
 
     this.checkActions(state);
 
@@ -150,17 +149,20 @@ class Color {
   }
 
   setCurrentClassColor(className) {
-    this.currentMark.classList.add(className);
-    this.currentClassColor = className;
+    this.currentSpan.classList.add(className);
   }
 
   removeCurrentClassColor() {
-    this.currentMark.classList.remove(this.currentClassColor);
+    this.classNameColors.forEach(className => {
+      if (this.currentSpan.classList.contains(className)) {
+        this.currentSpan.classList.remove(className);
+      }
+    });
   }
 
   static get sanitize() {
     return {
-      mark: {
+      span: {
         class: Color.CSS
       }
     };

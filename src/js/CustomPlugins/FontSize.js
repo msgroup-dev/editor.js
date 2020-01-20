@@ -7,7 +7,7 @@ class FontSize {
     this.api = api;
     this.button = null;
     this.tag = 'SPAN';
-    this.currentMark = null;
+    this.currentSpan = null;
     this.config = config || {};
 
     this.iconClasses = {
@@ -18,7 +18,6 @@ class FontSize {
     this.classNameSizes = this.config.sizes || [`${FontSize.CSS}_view_12`, `${FontSize.CSS}_view_14`, `${FontSize.CSS}_view_16`];
     this.sizeList = null;
     this.buttonsList = [];
-    this.currentClassSize = '';
 
     this.listSizeClasses = {
       list: 'font-size-list',
@@ -86,15 +85,15 @@ class FontSize {
   }
 
   wrap(range) {
-    this.currentMark = document.createElement(this.tag);
+    this.currentSpan = document.createElement(this.tag);
 
-    this.currentMark.classList.add(FontSize.CSS);
+    this.currentSpan.classList.add(FontSize.CSS);
     this.setCurrentClassSize(this.classNameSizes[0]);
-    this.currentMark.appendChild(range.extractContents());
+    this.currentSpan.appendChild(range.extractContents());
 
-    range.insertNode(this.currentMark);
+    range.insertNode(this.currentSpan);
 
-    this.api.selection.expandToTag(this.currentMark);
+    this.api.selection.expandToTag(this.currentSpan);
   }
 
   unwrap(termWrapper) {
@@ -113,8 +112,8 @@ class FontSize {
   }
 
   checkState() {
-    this.currentMark = this.api.selection.findParentTag(this.tag, FontSize.CSS);
-    const state = Boolean(this.currentMark);
+    this.currentSpan = this.api.selection.findParentTag(this.tag, FontSize.CSS);
+    const state = Boolean(this.currentSpan);
 
     this.checkActions(state);
 
@@ -150,17 +149,20 @@ class FontSize {
   }
 
   setCurrentClassSize(className) {
-    this.currentMark.classList.add(className);
-    this.currentClassSize = className;
+    this.currentSpan.classList.add(className);
   }
 
   removeCurrentClassSize() {
-    this.currentMark.classList.remove(this.currentClassSize);
+    this.classNameSizes.forEach(className => {
+      if (this.currentSpan.classList.contains(className)) {
+        this.currentSpan.classList.remove(className);
+      }
+    });
   }
 
   static get sanitize() {
     return {
-      mark: {
+      span: {
         class: FontSize.CSS
       }
     };

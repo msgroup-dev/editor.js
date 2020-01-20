@@ -18,7 +18,6 @@ class Marker {
     this.classNameColors = this.config.colors || [`${Marker.CSS}_view_default`, `${Marker.CSS}_view_danger`, `${Marker.CSS}_view_success`];
     this.colorList = null;
     this.buttonsList = [];
-    this.currentClassColor = '';
 
     this.listColorClasses = {
       list: 'background-color-list',
@@ -150,11 +149,14 @@ class Marker {
 
   setCurrentClassColor(className) {
     this.currentMark.classList.add(className);
-    this.currentClassColor = className;
   }
 
   removeCurrentClassColor() {
-    this.currentMark.classList.remove(this.currentClassColor);
+    this.classNameColors.forEach(className => {
+      if (this.currentMark.classList.contains(className)) {
+        this.currentMark.classList.remove(className);
+      }
+    });
   }
 
   static get sanitize() {
