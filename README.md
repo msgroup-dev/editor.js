@@ -1,17 +1,6 @@
 # EditorJS ([Оф. сайт](https://editorjs.io/ "Оф. сайт"))
 Готовый редактор к использованию в проектах.
 
-## Установка и публикация пакета
--  Установите зависимости: `yarn` или `npm install`
--  Перед публикацией пакета необходимо его собрать: `yarn build` или `npm run build`
--  Публикация пакета выполняется с помощью команды `np`
-
-## Разработка
--  Кастомные плагины находятся в директории: `src/js/CustomPlugins`
--  Обертка для редактора: `src/ContentEditor.js`
--  Точка входа (для Webpack): `src/index.js`
--  Стили для редактора: `src/styles`
-
 ## Используемые плагины от разработчика
 -  Заголовки (**Header**) - [документация](https://github.com/editor-js/header "документация")
 -  Списки (**List**) - [документация](https://github.com/editor-js/list "документация")
@@ -28,7 +17,7 @@
 ### Конфигурация кастомных плагинов
 В **плагины** - *Marker*, *Color*, *FontSize* мы можем **передать** *применяемые классы* к текстовым - нодам. Это делается с помощью свойства **Config** при подключении расширения.
 
-Передается массив, например, для плагина **Color** будет:` ['cdx-color_view_defaul', 'cdx-color_view_danger', 'cdx-color_view_success']`. 
+Передается массив, например, для плагина **Color** будет:` ['cdx-color_view_default', 'cdx-color_view_danger', 'cdx-color_view_success']`. 
 
 #### Конфигурация Marker и Colors
 Для *Marker* и *Color* - свойство с именем **colors**. 
@@ -40,11 +29,11 @@
 **Пример** полного кода:
 ```javascript
 color: {
-	class: Color,
-	shortcut: 'CMD+SHIFT+C',
-	config: {
-		colors: ['cdx-color_view_defaul', 'cdx-color_view_danger', 'cdx-color_view_success']
-	}
+  class: Color,
+  shortcut: 'CMD+SHIFT+C',
+  config: {
+    colors: ['cdx-color_view_defaul', 'cdx-color_view_danger', 'cdx-color_view_success']
+  }
 }
 ```
 ## Инициализация плагина
@@ -54,8 +43,47 @@ color: {
 Пример инициализации:
 ```javascript
 if (window.editorJS !== undefined) {
-	var editor = new window.editorJS();
+  var editor = new window.editorJS();
 }
 ```
+
+Дефолтный объект инициализации:
+```javascript
+{
+  holder: 'editorjs',
+  tools: {
+    header: {
+      class: Header,
+    },
+    list: {
+      class: List,
+      inlineToolbar: true,
+    },
+    embed: {
+      class: Embed,
+      inlineToolbar: ['false'],
+      config: {
+        services: {
+          youtube: true
+        }
+      }
+    },
+    image: {
+      class: ImageTool,
+    },
+    marker: {
+      class: Marker,
+      shortcut: 'CMD+SHIFT+M',
+    },
+    color: {
+      class: Color,
+      shortcut: 'CMD+SHIFT+C',
+    },
+    underline: Underline,
+    delete: Delete,
+    size: FontSize,
+};
+```
+Если вам не подходит данный конфиг, передайте свой объект конфигурации, основываясь на дефолтном.
 
 
