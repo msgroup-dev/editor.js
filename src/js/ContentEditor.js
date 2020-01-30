@@ -47,20 +47,55 @@ class ContentEditor {
         delete: Delete,
         size: FontSize,
       },
+      data: {},
     };
 
-    const params = initProps || defaultProps;
-
-    if (!params.holder) throw new Error('Please, set container editorJS.');
-
     this.editorJS = null;
-    this.params = params;
+
+    this.plugins = {
+      header: Header,
+      list: List,
+      embed: Embed,
+      imageTool: ImageTool,
+      marker: Marker,
+      color: Color,
+      underline: Underline,
+      delete: Delete,
+      fontSize: FontSize,
+    };
+
+    this.defaultParams = defaultProps;
+    this.initParams = initProps;
+    this.params = null;
 
     this.init();
   }
 
   init() {
+    this.choiceProps();
     this.editorJS = new EditorJS({ ...this.params });
+  }
+
+  choiceProps() {
+    if (!this.initParams || !Object.keys(this.initParams).length || !this.initParams.tools) {
+      this.params = this.defaultParams;
+      return;
+    }
+
+    if (!this.initParams.holder) {
+      throw new Error('Please, set container editorJS.');
+    }
+
+    this.connectPlugins();
+    this.params = this.initParams;
+  }
+
+  connectPlugins() {
+    const keysTools = Object.keys(this.initParams.tools);
+
+    keysTools.forEach((key) => {
+     this.initParams.tools[key].class = this.plugins[key];
+    });
   }
 }
 
