@@ -162,7 +162,7 @@ class Marker {
   static get sanitize() {
     return {
       mark: {
-        class: Marker.CSS
+        class: true,
       }
     };
   }

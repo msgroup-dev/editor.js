@@ -163,7 +163,7 @@ class FontSize {
   static get sanitize() {
     return {
       span: {
-        class: FontSize.CSS
+        class: true,
       }
     };
   }

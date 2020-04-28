@@ -163,7 +163,7 @@ class Color {
   static get sanitize() {
     return {
       span: {
-        class: Color.CSS
+        class: true,
       }
     };
   }

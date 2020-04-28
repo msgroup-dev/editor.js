@@ -1,0 +1,10 @@
+.idea/
+dist/index.html
+src/
+.babelrc
+.browserslistrc
+.git
+.gitmodules
+postcss.config.js
+webpack.config.js
+yarn.lock
